@@ -67,16 +67,3 @@ def mergeSort(values: list, p=None, r=None, verbose=False):
 
     return(values)
 
-"""
-TESTES
-"""
-import random 
-
-data = random.sample(range(100), 13)
-print('Lista a ordenar: {}\n'.format(data))
-
-size = len(data)
-#sys.setrecursionlimit(1500)
-
-mergeSort(data)#, verbose=True)
-print(data)

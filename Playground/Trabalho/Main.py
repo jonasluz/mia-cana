@@ -5,6 +5,11 @@
 #   Por Jonas de A. Luz Jr. 
 #
 
+from q5 import *
+from q6 import *
+
+import merge_sort as sort
+
 import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
@@ -39,8 +44,8 @@ def plotItem(item):
          '2a': (2**(2*n+1), 3**(3*n), '2^{2n+1}', '3^{3n}', None, True, False),
          '2b': ((4*n-5)**10, n**10, '(4n-5)^{10}', 'n^{10}', None, False, False),
          '2c': (2*n**3, n**2, '2n^3', 'n^2', None, True, False),
-         '2d-O': (4*n**6+3*n**5-4*n**3+2*n**2-n, 6*n**6, '4n^6+3n^5-4n^3+2n^2-n', 'c.n^6, c=6', None, True, False),
-         '2d-Ω': (4*n**6+3*n**5-4*n**3+2*n**2-n, 2*n**6, '4n^6+3n^5-4n^3+2n^2-n', 'c.n^6, c=2', None, False, False),
+         '2d-O': (4*n**6+3*n**5-4*n**3+2*n**2-n, 9*n**6, '4n^6+3n^5-4n^3+2n^2-n', 'c.n^6, c=9', None, True, False),
+         '2d-Ω': (4*n**6+3*n**5-4*n**3+2*n**2-n, 3*n**6, '4n^6+3n^5-4n^3+2n^2-n', 'c.n^6, c=3', None, False, False),
          #'01': (-2*n**2, -4*n**2+2*n, '-2n^2', '-4n^2+2n', None, None, False),
          #'01': (-n, 2*n-1, '-n', '2n-1', None, None, False),
          #'01': (-6*n**2, -4*n**2-n, '-6n^2', '-4n^2-n', None, None, False),
@@ -56,7 +61,7 @@ def plotItem(item):
         ax.fill_between(n, y1, y2, alpha=0.5)
     if fillOB != None:
         y1, y2 = (0, b) if fillOB else (b, 10)
-       ax.fill_between(n, y1, y2, alpha=0.5)
+        ax.fill_between(n, y1, y2, alpha=0.5)
     if doubt:
         ax.fill_between(n, 0, 10, alpha=0.2)
     
@@ -80,6 +85,7 @@ def doQuestion(question):
         plotItem('1f')
         plotItem('1g')
         plotItem('1h')
+
     elif question == 2:
         g_ylim = 1000
         plotItem('2a')
@@ -90,13 +96,43 @@ def doQuestion(question):
         plotItem('2d-O')
         g_ylim = 1000
         plotItem('2d-Ω')
+
+    elif question == 5:
+        import random
+        candidatos = [
+                'Joaquim José da Silva Xavier',
+                'Pedro Álvares de Alencar',
+                'Luiz C Bonaparte Peixoto',
+                'Claudio Emanuel da Silva',
+            ]
+        cumpridos  = random.sample(range(100), 4)
+        cumpridos[3] = cumpridos[1] # adiciona um repetido.
+        tempos     = random.sample(range(100), 4)
+        #tempos[2] = tempos[0]       # adiciona um repetido. 
+        tempos[3] = tempos[1]       # adiciona um repetido. 
+        #tempos = cumpridos = [0,0,0,0]
+        print('Avaliando os candidatos, algoritmos executados e tempos respectivos:')
+        for k, n in enumerate(candidatos):
+            print('{} \t\t- {} em {}t'.format(n, cumpridos[k], tempos[k]))
+        q5avaliador(candidatos, cumpridos, tempos)
+        
+    elif question == 6:
+        import random
+        a = random.sample(range(100), 50)
+        i = q6recmenor(a)
+        print ('Índice encontrado: {} com valor {}'.format(i, a[i]))
+        sort.mergeSort(a)
+        print(a[0])
+        
     elif question == 0:
         g_y0, g_ylim = -100, 100
         plotItem('01')
         
-## MAIN PROGRAM
+## ROTINA PRINCIPAL
 #
 
 #doQuestion(0) # Comparação de funções.
-doQuestion(1)
+#doQuestion(1)
 #doQuestion(2)
+#doQuestion(5)
+doQuestion(6)
